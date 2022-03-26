@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import FeedbackItem from "./FeedbackItem";
 
-function FeedbackList({ feedback }) {
+function FeedbackList({ feedback, handleDelete }) {
   if (!feedback || !feedback.length) {
     return <p>No Feedback yet!</p>;
   }
@@ -9,7 +9,11 @@ function FeedbackList({ feedback }) {
   return (
     <div className="feedback-list">
       {feedback.map((item) => (
-        <FeedbackItem key={item.id} item={item} />
+        <FeedbackItem
+          key={item.id}
+          item={item}
+          handleDelete={(id) => handleDelete(id)}
+        />
       ))}
     </div>
   );
@@ -23,6 +27,7 @@ FeedbackList.propTypes = {
       rating: PropTypes.number.isRequired,
     })
   ),
+  handleDelete: PropTypes.func,
 };
 
 export default FeedbackList;
