@@ -3,17 +3,24 @@ import { useState } from "react";
 import Header from "./components/Header";
 import FeedbackList from "./components/FeedbackList";
 import FeedbackData from "./data/FeedbackData";
-import Card from "./components/shared/Card";
 
 function App() {
-  const [feedback, setFeetback] = useState(FeedbackData);
+  const [feedback, setFeedback] = useState(FeedbackData);
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure delete this item?")) {
+      setFeedback(feedback.filter((el) => el.id !== id));
+    }
+  };
 
   return (
     <>
       <Header />
       <div className="container">
-        <FeedbackList feedback={feedback} />
-        <Card> Hello Card </Card>
+        <FeedbackList
+          feedback={feedback}
+          handleDelete={(id) => handleDelete(id)}
+        />
       </div>
     </>
   );
